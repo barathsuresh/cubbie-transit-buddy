@@ -106,6 +106,14 @@ Only check services relevant to the student's requested journey.
 
 ## 3. Verification Workflow
 
+Receive the Never Late API response through `directions.md` and read its `journeys[]` array. Treat each entry as a candidate journey, not a verified or recommended route.
+
+For each journey, inspect its `steps[]` array and verify every step where `type` is `"transit"`. For journeys containing multiple transit legs, verify each leg independently.
+
+Walking-only journeys do not require transit service verification. Pass them to `commute-intelligence.md` for feasibility evaluation.
+
+Preserve each journey's `id` so verification results can be matched to the correct journey, even when multiple journeys use the same route at different departure times.
+
 For each candidate journey:
 
 ### Step 1: Identify the transportation provider
