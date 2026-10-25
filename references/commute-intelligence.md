@@ -44,7 +44,11 @@ Obtain the following information before evaluating journeys.
 
 ### Journey Information
 
-Retrieve candidate journeys using `directions.md`.
+Receive the Never Late API's journeys[] response through directions.md, together with the verification results from transit-sources.md.
+
+Match verification results to journeys using journey_id.
+
+Evaluate every candidate journey independently. Do not assume the first entry in journeys[] is the recommended primary route.
 
 Each journey should contain, where available:
 
@@ -83,7 +87,7 @@ Preferred arrival buffer: 10 minutes
 
 Latest preferred arrival: 8:50 AM
 
-If the student has not specified an arrival buffer, suggest 10 minutes and allow them to change it.
+Use a fixed 10-minute arrival buffer for calendar events. The preferred arrival deadline is the event start time minus 10 minutes. Do not prompt the student to configure this buffer. If the student explicitly requests a different arrival deadline, honor that request.
 
 Distinguish between:
 
@@ -237,7 +241,11 @@ The backup may be feasible if the student can reach its boarding stop in time.
 
 However, a backup departing at 8:00 AM would not be useful after missing the 8:05 AM primary bus.
 
-Do not recommend an alternative solely because it appears as the second-fastest journey.
+Do not select a journey as the missed-primary backup if its required departure or boarding time occurs before the primary journey's boarding time.
+
+A backup must remain feasible from the student's likely location at the time the primary is missed.
+
+If none of the returned journeys is a feasible backup, request fresh journey candidates when needed rather than selecting an earlier departure.
 
 ### Backup Independence
 
@@ -307,7 +315,9 @@ Recommended leave-home time: 8:05 AM
 
 Do not tell the student to leave home at the exact time their bus departs.
 
-If the route-planning backend already provides a door-to-door departure time, use it consistently and avoid subtracting walking time twice.
+Treat each journey's leave_by as the backend-calculated door-to-door departure time. Use it directly when evaluating departure feasibility and scheduling reminders. Do not subtract walking time or boarding buffers again.
+
+If the student's current time or location makes leave_by infeasible, request a fresh route plan.
 
 ## 11. Expected Decision Output
 
