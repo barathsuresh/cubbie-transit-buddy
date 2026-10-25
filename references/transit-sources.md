@@ -177,6 +177,21 @@ Distinguish between:
 
 A vehicle position alone does not establish an exact arrival time.
 
+### Interpret backend routing information
+
+Interpret these fields in the Never Late API's `journeys[]` response as follows:
+
+- `on_time: true` means routing data predicts arrival by the requested `arrive_by` deadline. It does not confirm that the transit service is operating.
+- `availability: "UNCERTAIN"` is the initial transit availability status returned by the backend, not the final verification result.
+- `realtime: false` means transit departure information is scheduled rather than a live prediction.
+- `service_alerts_checked: false` means relevant official service alerts have not yet been checked.
+
+Treat the backend's `availability` as an initial status, not an authoritative confirmation. Independently verify transit schedules, operating hours, and relevant service alerts using the official sources listed in this document, then assign a final status of `AVAILABLE`, `UNAVAILABLE`, or `UNCERTAIN` using Step 6.
+
+`AVAILABLE` means the published schedule supports the journey and no known applicable disruption prevents it. It does not guarantee that a vehicle is currently running or will arrive on time. If official information cannot confirm the relevant service, retain `UNCERTAIN` rather than assuming availability.
+
+Keep the backend's original routing information intact. Store Cubbie's verification result separately so `commute-intelligence.md` can distinguish routing feasibility from verified transit availability, without changing the Never Late API response schema.
+
 ### Step 6: Determine availability
 
 Assign one of the following statuses:
