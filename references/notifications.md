@@ -43,7 +43,6 @@ Retrieve from `onboarding.md` or Cubbie's memory:
 - Whether commute reminders are enabled
 - Preferred preparation reminder lead time
 - Preferred notification frequency
-- Preferred arrival buffer
 - Transportation preferences
 - Starting location
 
@@ -62,7 +61,7 @@ Retrieve from `commute-intelligence.md`:
 
 Never calculate reminder times from the vehicle departure time alone.
 
-Use the recommended leave-home time, which already accounts for walking to the boarding stop.
+Use the selected primary journey's leave_by value as the recommended leave-home time. This value already accounts for door-to-door travel. Do not subtract walking time or boarding buffers again.
 
 ## 3. Notification Types
 
@@ -137,6 +136,8 @@ Include:
 - Any relevant service warning
 
 Avoid unnecessary details when the student needs to leave immediately.
+
+For walking-only journeys, remind the student to begin walking at leave_by. Do not include a boarding stop, transit route, or vehicle departure time.
 
 ### D. Backup Route Notification
 
@@ -215,14 +216,21 @@ Use the destination and route-planning workflows to determine:
 ### Step 3: Calculate Reminder Times
 
 Calculate the preparation reminder relative to the recommended leave-home time.
+Schedule the departure reminder at the selected primary journey's leave_by time.
 
-Schedule the departure reminder for the recommended leave-home time.
+When a supported scheduled check runs, verify that the selected journey is still feasible using the current time and available transit information. If the journey is no longer feasible, replan before sending an outdated departure instruction.
 
-Use the event's local time zone.
+When an event is rescheduled, canceled, or its destination changes, update or cancel the associated commute reminders. Do not leave reminders active for obsolete journeys.
+
+Use the event's applicable IANA time zone, normally America/Phoenix for ASU and Tempe commutes. Preserve the time-zone offset when interpreting leave_by timestamps from the Never Late API.
 
 ### Step 4: Create Cubbie Reminders
 
 Use Cubbie's built-in reminder or scheduled-task capability.
+
+Associate each scheduled reminder with the calendar event identifier and reminder type. Before creating a reminder, check whether an equivalent reminder already exists. Update or replace it instead of creating a duplicate. Cancel obsolete reminders when an event is canceled or its commute plan changes.
+
+If a calendar event identifier is unavailable, use a stable combination of event date, start time, destination, and reminder type to identify equivalent reminders.
 
 Do not create a custom SMS or RCS delivery system.
 
@@ -234,4 +242,4 @@ Example:
 
 "Done! I'll remind you at 7:45 AM to get ready and at 8:05 AM to leave."
 
-Only confirm
+Only confirm reminders that Cubbie's scheduling capability has successfully created or updated. If scheduling fails or is unavailable, explain the limitation instead of promising a reminder.
