@@ -1,0 +1,54 @@
+{
+  "ok": true,
+  "data_quality": "scheduled",
+  "fallback_needed": false,
+  "generated_at": "2026-10-26T07:30:00-07:00",
+  "trip": {
+    "origin_label": "Home",
+    "destination_label": "Interdisciplinary Science and Technology IV (ISTB4) 101",
+    "arrive_by": "2026-10-26T09:00:00-07:00",
+    "timezone": "America/Phoenix"
+  },
+  "journeys": [
+    {
+      "id": "journey_A", "mode": "TRANSIT", "provider": "Fictional Transit", "route": "Route A1 + Route A2",
+      "leave_by": "2026-10-26T08:00:00-07:00", "arrive_at": "2026-10-26T08:40:00-07:00", "total_min": 40, "on_time": true,
+      "steps": [
+        {"type": "walk", "minutes": 5, "text": "Walk to Stop A"},
+        {"type": "transit", "provider": "Fictional Transit", "route": "Route A1", "direction": "Campus", "boarding_stop": "Stop A",
+         "destination_stop": "Transfer Stop", "depart_at": "2026-10-26T08:06:00-07:00", "arrive_at": "2026-10-26T08:20:00-07:00",
+         "realtime": false, "source": "fixture", "availability": "UNCERTAIN", "service_alerts_checked": false},
+        {"type": "transit", "provider": "Fictional Transit", "route": "Route A2", "direction": "Campus", "boarding_stop": "Transfer Stop",
+         "destination_stop": "Campus Stop", "depart_at": "2026-10-26T08:25:00-07:00", "arrive_at": "2026-10-26T08:35:00-07:00",
+         "realtime": false, "source": "fixture", "availability": "UNCERTAIN", "service_alerts_checked": false},
+        {"type": "walk", "minutes": 5, "text": "Walk to ISTB4"}
+      ]
+    },
+    {
+      "id": "journey_B", "mode": "TRANSIT", "provider": "Fictional Transit", "route": "Route B",
+      "leave_by": "2026-10-26T08:10:00-07:00", "arrive_at": "2026-10-26T08:45:00-07:00", "total_min": 35, "on_time": true,
+      "steps": [
+        {"type": "walk", "minutes": 5, "text": "Walk to Stop B"},
+        {"type": "transit", "provider": "Fictional Transit", "route": "Route B", "direction": "Campus", "boarding_stop": "Stop B",
+         "destination_stop": "Campus Stop", "depart_at": "2026-10-26T08:16:00-07:00", "arrive_at": "2026-10-26T08:40:00-07:00",
+         "realtime": false, "source": "fixture", "availability": "UNCERTAIN", "service_alerts_checked": false},
+        {"type": "walk", "minutes": 5, "text": "Walk to ISTB4"}
+      ]
+    },
+    {
+      "id": "journey_C", "mode": "TRANSIT", "provider": "Fictional Transit", "route": "Route C",
+      "leave_by": "2026-10-26T08:20:00-07:00", "arrive_at": "2026-10-26T09:05:00-07:00", "total_min": 45, "on_time": false,
+      "steps": [
+        {"type": "walk", "minutes": 5, "text": "Walk to Stop C"},
+        {"type": "transit", "provider": "Fictional Transit", "route": "Route C", "direction": "Campus", "boarding_stop": "Stop C",
+         "destination_stop": "Campus Stop", "depart_at": "2026-10-26T08:26:00-07:00", "arrive_at": "2026-10-26T09:00:00-07:00",
+         "realtime": false, "source": "fixture", "availability": "UNCERTAIN", "service_alerts_checked": false},
+        {"type": "walk", "minutes": 5, "text": "Walk to ISTB4"}
+      ]
+    }
+  ],
+  "verification": {"transit_schedule_source": "fixture", "service_alerts_checked": false,
+                   "live_vehicle_tracking": false, "official_schedule_verified": false},
+  "maps_link": "https://www.google.com/maps/dir/?api=1",
+  "degraded": []
+}

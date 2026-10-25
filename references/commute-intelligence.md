@@ -46,7 +46,7 @@ Obtain the following information before evaluating journeys.
 
 Receive the Never Late API's journeys[] response through directions.md, together with the verification results from transit-sources.md.
 
-Match verification results to journeys using journey_id.
+Match verification results to journeys using each journey's `id`.
 
 Evaluate every candidate journey independently. Do not assume the first entry in journeys[] is the recommended primary route.
 
@@ -368,13 +368,13 @@ Keep responses concise and suitable for iMessage or RCS.
 
 Example:
 
-🚌 **Your 9 AM class**
+🚌 Your 9 AM class
 
-✅ **Best route: Orbit**
+✅ Best route: Orbit
 Leave home: 8:05 AM
 Expected arrival: 8:45 AM
 
-🔄 **Backup: Valley Metro**
+🔄 Backup: Valley Metro
 Leave home: 8:12 AM
 Expected arrival: 8:55 AM
 

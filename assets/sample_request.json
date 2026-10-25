@@ -1,0 +1,19 @@
+{
+  "origin": {
+    "label": "Tempe Marketplace",
+    "address": "2000 E Rio Salado Pkwy, Tempe, AZ 85288"
+  },
+  "destination": {
+    "label": "Paul C. Helmick Center (HLMK) 120",
+    "address": "660 S. College Ave., Tempe, AZ 85281",
+    "lat": 33.423574,
+    "lng": -111.935219
+  },
+  "arrive_by": "2026-10-26T09:00:00-07:00",
+  "modes": [
+    "TRANSIT",
+    "WALK",
+    "BICYCLE"
+  ],
+  "buffer_min": 10
+}
