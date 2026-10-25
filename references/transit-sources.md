@@ -117,6 +117,14 @@ Determine whether the journey uses:
 - FLASH
 - A combination of transportation services
 
+For each transit leg in each candidate journey's `steps[]` within `journeys[]`, use the combination of `provider`, `route`, `direction`, `boarding_stop`, `destination_stop`, and other available transit-leg information to identify the appropriate official transit source listed in Section 1. Never rely solely on the `provider` field.
+
+Google Routes API may group Tempe Orbit, light rail, streetcar, and regular bus routes under `Valley Metro`. When `route` identifies an Orbit service, such as `Orbit Mars` or `Orbit Mercury`, consult the official Tempe Orbit source even if `provider` is `Valley Metro`.
+
+Preserve the original `provider` and `route` values returned by the backend without overwriting them. Identify the official source using existing journey information; do not introduce a new `service` field or require changes to the Never Late API response.
+
+If the appropriate official source cannot be confidently identified, mark the verification as `UNCERTAIN` rather than guessing.
+
 ### Step 2: Verify the route
 
 Confirm that the route serves the required boarding and destination stops.
